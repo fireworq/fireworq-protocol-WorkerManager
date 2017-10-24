@@ -1,0 +1,3 @@
+[submodule "WorkerManager"]
+	path = WorkerManager
+	url = https://github.com/hatena/WorkerManager
