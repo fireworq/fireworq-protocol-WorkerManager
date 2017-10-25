@@ -3,4 +3,4 @@
 ROOT=$(cd $(dirname "$0")/..; pwd)
 cd "$ROOT"
 carton install
-exec carton exec -- perl -Ilib script/server.pl "$@"
+exec carton exec -- perl -I"$ROOT"/lib script/server.pl "$@"
