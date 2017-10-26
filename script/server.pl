@@ -25,10 +25,16 @@ $web_max_workers //= 256;
 $queue_db //= 'theschwartz';
 $queue_host //= '127.0.0.1';
 $queue_port //= '3306';
+$queue_user //= 'root';
+$queue_pass //= '';
 $queue_max_workers //= 20;
 $ENV{THESCHWARTZ_DSN} = "dbi:mysql:database=${queue_db};host=${queue_host};port=${queue_port}";
-$ENV{THESCHWARTZ_USER} = $queue_user // 'root';
-$ENV{THESCHWARTZ_PASSWORD} = $queue_pass // '';
+$ENV{THESCHWARTZ_USER} = $queue_user;
+$ENV{THESCHWARTZ_PASSWORD} = $queue_pass;
+
+my $mysql_cmd = "mysql -h$queue_host -P$queue_port -u$queue_user";
+$mysql_cmd .= " -p$queue_pass" if $queue_pass;
+system("cat db/theschwartz.sql | $mysql_cmd $queue_db");
 
 my $server = Proclet->new(color => 1);
 
